@@ -2,57 +2,69 @@
 
 TCP IP = 소켓 프로그래밍 = 네트워크 프로그래밍
 
-
-1. 네트워크 프로그래밍
+## 1. 네트워크 프로그래밍
 
 - 정의: 데이터를 주고받는 방법
 - 운영체제에서 소켓 제공
 - 소켓:  네트워크 상에서 연결 및 데이터 송수신을 해주는 소프트웨어적인 도구 (네트워크의 연결 도구)
 
-
-2. 전화 받는 소켓의 생성
+## 2. 전화 받는 소켓의 생성
 
 - 소켓은 socket 함수의 호출을 통해서 생성된다.
 - 송/수신 용도의 소켓 생성 방법에는 차이가 있음.
+
 ex) 
+
 #include <sys/socket.h>
+
 int socket(int domain, int type, int protocol);
 
-
-3. 전화번호의 부여
+## 3. 전화번호의 부여
 
 - 소켓의 주소 할당 및 연결
 - 소켓의 고유한 번호(주소 : IP, PORT)가 있어야 함.
+
 ex) socket 함수로 소켓 생성 >> bind 함수로 번호 부여
+
 int bind(int sockfd, struct sockaddr *myaddr, socklen_t addrlen);
 
-
-4. 전화기의 연결
+## 4. 전화기의 연결
 
 - listen 함수로 전화망에 연결
+
 ex) socket >> bind >> listen
+
 int listen(int sockfd, int backlog);
 
-5. 수화기를 드는 상황
+## 5. 수화기를 드는 상황
 
 - 연결요청의 수락
 - 걸려오는 전화에 대해서 수락의 의미로 accept 사용
 - 연결된 이후 양방향 수신 가능
+
 ex)
+
 int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
 
-
-정리
+## 정리
 
 - 1단계 (socket) : 소켓의 생성
 - 2단계 (bind) : IP와 PORT 번호의 할당
 - 3단계 (listen): 연결요청 가능 상태로 변경
 - 4단계 (accept): 연결요청에 대한 수락
 
-
-6. 전화 거는 소켓의 구현
+## 6. 전화 거는 소켓의 구현
 
 - 연결을 요청하는 소켓의 구현
 - socket 생성 함수 호출 (주소할당됨) >> connect 함수 통해 연결요청
+
 ex)
+
 int connect(int sockfd, strcut sockaddr *serv_addr, socklen_t addrlen);
+
+## 리눅스 기반에서 실행
+
+- mware 에 리눅스 설치 ⇒ 윈도우서 리눅스 사용가능
+- 컴파일 : gcc hello_server.c -o hserver // hello_server.c 파일을 컴파일해서 hserver라는 이름의 실행파일을 만드는 문장이다.
+- 실행방법: ./hserver [IP] [PORT] // 현재 디렉터리에 있는 hserver라는 이름의 파일을 실행시키라는 의미이다.
+- server와 client 두개 생성
