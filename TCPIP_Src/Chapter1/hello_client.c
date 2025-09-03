@@ -19,19 +19,19 @@ int main(int argc, char* argv[])
 		exit(1);
 	}
 	
-	sock=socket(PF_INET, SOCK_STREAM, 0);
+	sock=socket(PF_INET, SOCK_STREAM, 0);	// 소켓 생성
 	if(sock == -1)
 		error_handling("socket() error");
 	
-	memset(&serv_addr, 0, sizeof(serv_addr));
+	memset(&serv_addr, 0, sizeof(serv_addr));	// 상대방의 주소정보 초기화
 	serv_addr.sin_family=AF_INET;
 	serv_addr.sin_addr.s_addr=inet_addr(argv[1]);
 	serv_addr.sin_port=htons(atoi(argv[2]));
 		
-	if(connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr))==-1) 
+	if(connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr))==-1)	// serv_addr에 connect 함수를 통해 연결
 		error_handling("connect() error!");
 	
-	str_len=read(sock, message, sizeof(message)-1);
+	str_len=read(sock, message, sizeof(message)-1);	// connect == read / listen == write 읽은 데이터를 상대방에게 출력
 	if(str_len==-1)
 		error_handling("read() error!");
 	
